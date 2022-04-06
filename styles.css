@@ -1,0 +1,34 @@
+html, body{
+    height: 100%;
+    margin: 0px;
+}
+
+main{
+    display: flex;
+    height: 100%;
+}
+
+main>div{
+    height: 100%;
+    width: 50%;
+}
+
+#inputSection{
+    background-color: aquamarine;
+}
+
+#outputSection{
+    background-color: coral;
+}
+
+#classGroups{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 2rem;
+}
+
+.classGroup{
+    border: solid;
+    padding: 0 2rem;
+}
