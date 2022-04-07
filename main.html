@@ -13,13 +13,16 @@
             <section>
                 <input id="studentInput" type="text">
                 <button id="addStudentBtn">Añadir alumno</button>
-                <input id="groupSizeInput" type="number">
+                <input id="groupSizeInput" type="number" min="2" value="2">
                 <button id="generateGroupsBtn">Generar grupos</button>
+            </section>
+            <section id="classGroup">
+                <!-- Aquí se genera el grupo de clase actual -->
             </section>
         </div>
         <div id="outputSection">
-            <section id="classGroups">
-                <!-- Aquí se generan los grupos. -->
+            <section id="teams">
+                <!-- Aquí se generan los equipos. -->
             </section>
     </main>
 

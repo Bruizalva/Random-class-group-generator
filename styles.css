@@ -21,14 +21,14 @@ main>div{
     background-color: coral;
 }
 
-#classGroups{
+#teams{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 2rem;
 }
 
-.classGroup{
+.team{
     border: solid;
     padding: 0 2rem;
 }
