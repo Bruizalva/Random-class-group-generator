@@ -14,12 +14,24 @@ const DOM = {
 DOM.groupSizeInput.addEventListener("input", function(){groupSize = groupSizeInput.value});
 DOM.generateGroupsBtn.addEventListener("click", showTeams);
 DOM.addStudentBtn.addEventListener("click", addStudent);
+DOM.classGroup.addEventListener("click", removeStudent);
 
 
 (function()
 {
     showStudents();
 })();
+
+
+function removeStudent(event)
+{
+    if (event.target.className == "removeStudentCross")
+    {
+        let indexToRemove = event.target.parentNode.getAttribute("data-student-index");
+        students.splice(indexToRemove, 1);
+        showStudents();
+    }
+}
 
 
 /**
@@ -41,12 +53,17 @@ function addStudent()
  */
 function showStudents()
 {
-    DOM.classGroup.innerHTML = "";
-    students.forEach(student => {
+    DOM.classGroup.innerHTML = "<h2>Grupo Actual:</h2>";
+    students.forEach((student, index) => {
         let studentDiv = document.createElement("div");
         studentDiv.classList.add("student");
+        studentDiv.setAttribute("data-student-index", index);
         let studentName = document.createElement("p");
         studentName.textContent = student;
+        let removeStudentCross = document.createElement("img");
+        removeStudentCross.setAttribute("src", "./assets/remove-student-cross.svg");
+        removeStudentCross.classList.add("removeStudentCross");
+        studentDiv.append(removeStudentCross);
         studentDiv.append(studentName);
         DOM.classGroup.append(studentDiv);
     });

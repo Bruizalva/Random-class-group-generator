@@ -32,3 +32,20 @@ main>div{
     border: solid;
     padding: 0 2rem;
 }
+
+#classGroup{
+    border: solid black;
+}
+
+.student{
+    height: 1rem;
+    display: flex;
+}
+
+.student p{
+    margin: 0px;
+}
+
+.removeStudentCross{
+    height: 100%;
+}
