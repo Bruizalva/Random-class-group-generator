@@ -8,13 +8,13 @@ const DOM = {
     generateGroupsBtn: document.querySelector("#generateGroupsBtn"),
     groupSizeInput: document.querySelector("#groupSizeInput"),
     teams: document.querySelector("#teams"),
-    classGroup: document.querySelector("#classGroup"),
+    students: document.querySelector("#students"),
 }
 
 DOM.groupSizeInput.addEventListener("input", function(){groupSize = groupSizeInput.value});
 DOM.generateGroupsBtn.addEventListener("click", showTeams);
 DOM.addStudentBtn.addEventListener("click", addStudent);
-DOM.classGroup.addEventListener("click", removeStudent);
+DOM.students.addEventListener("click", removeStudent);
 
 
 (function()
@@ -53,7 +53,7 @@ function addStudent()
  */
 function showStudents()
 {
-    DOM.classGroup.innerHTML = "<h2>Grupo Actual:</h2>";
+    DOM.students.innerHTML = "";
     students.forEach((student, index) => {
         let studentDiv = document.createElement("div");
         studentDiv.classList.add("student");
@@ -65,7 +65,7 @@ function showStudents()
         removeStudentCross.classList.add("removeStudentCross");
         studentDiv.append(removeStudentCross);
         studentDiv.append(studentName);
-        DOM.classGroup.append(studentDiv);
+        DOM.students.append(studentDiv);
     });
 }
 
@@ -85,6 +85,7 @@ function showTeams()
             let teamDiv = document.createElement("div");
             teamDiv.classList.add("team");
             let teamIdHeader = document.createElement("h3");
+            teamIdHeader.classList.add("teamId");
             teamIdHeader.textContent = "Grupo " + teamId++;
             teamDiv.append(teamIdHeader);
             team.forEach(teamMember => 

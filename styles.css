@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 html, body{
     height: 100%;
     margin: 0px;
@@ -15,6 +19,7 @@ main>div{
 
 #inputSection{
     background-color: aquamarine;
+    padding: 1.5rem;
 }
 
 #outputSection{
@@ -26,20 +31,51 @@ main>div{
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 2rem;
+    padding: 2rem;
 }
 
 .team{
     border: solid;
-    padding: 0 2rem;
+    border-radius: 20px;
+}
+
+.team>*{
+    text-align: center;
+    padding: 1rem 1.5rem;
+    margin: 0px;
+}
+
+.teamMember{
+    border-top: solid black 2px;
+    margin: 0px;
 }
 
 #classGroup{
     border: solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.25rem;
+}
+
+.groupTitle{
+    margin: 0px;
+}
+
+#students{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .student{
-    height: 1rem;
     display: flex;
+    align-items: center;
+    display: flex;
+    border: solid 1px;
+    border-radius: 0.5rem;
+    padding: 0.4rem;
+    gap: 0.5rem;
 }
 
 .student p{
@@ -47,5 +83,5 @@ main>div{
 }
 
 .removeStudentCross{
-    height: 100%;
+    height: 1rem;
 }
