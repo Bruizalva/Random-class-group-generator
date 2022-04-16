@@ -20,6 +20,9 @@ main>div{
 #inputSection{
     background-color: aquamarine;
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 #outputSection{
@@ -50,7 +53,7 @@ main>div{
     margin: 0px;
 }
 
-#classGroup{
+#classGroup, #storagedGroups{
     border: solid black;
     display: flex;
     flex-direction: column;
@@ -58,30 +61,30 @@ main>div{
     gap: 1.25rem;
 }
 
-.groupTitle{
+#groupTitle, #storagedGroupsTitle{
     margin: 0px;
 }
 
-#students{
+#students, #groups{
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-.student{
+.student, .storagedGroup{
     display: flex;
     align-items: center;
     display: flex;
     border: solid 1px;
     border-radius: 0.5rem;
-    padding: 0.4rem;
-    gap: 0.5rem;
 }
 
-.student p{
+.student p, .storagedGroup p{
     margin: 0px;
+    padding: 0.4rem;
 }
 
-.removeStudentCross{
+.removeStudentCross, .removeGroupCross{
     height: 1rem;
+    margin: 0.4rem;
 }

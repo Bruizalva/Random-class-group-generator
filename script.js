@@ -1,4 +1,5 @@
-var students = ["María", "Jose Luis", "Ricardo", "Ernesto", "Josefina", "Timmy", "Joseph", "Macarena", "Jimmy", "Adolfo", "Lucía", "Ángel", "Jacobina"];
+var students = [];
+var currentGroupIndex = -1;
 var groupSize = groupSizeInput.value;
 
 const DOM = {
@@ -9,20 +10,61 @@ const DOM = {
     groupSizeInput: document.querySelector("#groupSizeInput"),
     teams: document.querySelector("#teams"),
     students: document.querySelector("#students"),
+    groups: document.querySelector("#groups"),
 }
 
 DOM.groupSizeInput.addEventListener("input", function(){groupSize = groupSizeInput.value});
 DOM.generateGroupsBtn.addEventListener("click", showTeams);
 DOM.addStudentBtn.addEventListener("click", addStudent);
 DOM.students.addEventListener("click", removeStudent);
+DOM.groups.addEventListener("click", selectStoragedGroup);
 
 
 (function()
 {
     showStudents();
+    showStoragedGroups();
 })();
 
 
+function selectStoragedGroup(event)
+{
+    if (event.target.className == "groupName")
+    {
+        let selectedGroupIndex = event.target.parentNode.getAttribute("data-group-index");
+        students = JSON.parse(localStorage.RCG2groups)[selectedGroupIndex].students;
+        currentGroupIndex = parseInt(selectedGroupIndex);
+        showStudents();
+    }
+}
+
+
+function showStoragedGroups(){
+    if (localStorage.RCG2groups)
+    {
+        DOM.groups.innerHTML = "";
+        let groups = JSON.parse(localStorage.RCG2groups);
+        groups.forEach((group, index) => 
+        {
+            let groupDiv = document.createElement("div");
+            groupDiv.classList.add("storagedGroup");
+            groupDiv.setAttribute("data-group-index", index);
+            let groupName = document.createElement("p");
+            groupName.classList.add("groupName");
+            groupName.textContent = group.name;
+            let removeGroupCross = document.createElement("img");
+            removeGroupCross.setAttribute("src", "./assets/remove-cross.svg");
+            removeGroupCross.classList.add("removeGroupCross");
+            groupDiv.append(removeGroupCross);
+            groupDiv.append(groupName);
+            DOM.groups.append(groupDiv);
+        })
+    }
+}
+
+/**
+ * Si se clicka una de las "x" de la lista de alumnos, elimina al alumno en cuestión.
+ */
 function removeStudent(event)
 {
     if (event.target.className == "removeStudentCross")
@@ -61,7 +103,7 @@ function showStudents()
         let studentName = document.createElement("p");
         studentName.textContent = student;
         let removeStudentCross = document.createElement("img");
-        removeStudentCross.setAttribute("src", "./assets/remove-student-cross.svg");
+        removeStudentCross.setAttribute("src", "./assets/remove-cross.svg");
         removeStudentCross.classList.add("removeStudentCross");
         studentDiv.append(removeStudentCross);
         studentDiv.append(studentName);
