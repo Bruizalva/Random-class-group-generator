@@ -1,6 +1,7 @@
-var students = [];
+var students = []; //Estudiantes del grupo actual
 var currentGroupIndex = -1;
 var groupSize = groupSizeInput.value;
+if (!localStorage.RCG2groups) localStorage.RCG2groups = JSON.stringify([]); //FORMATO: {name: 'Grupo de prueba', students: ["a", "b"]}
 
 const DOM = {
     outputSection: document.querySelector("#outputSection"),
@@ -11,6 +12,7 @@ const DOM = {
     teams: document.querySelector("#teams"),
     students: document.querySelector("#students"),
     groups: document.querySelector("#groups"),
+    saveGroupBtn: document.querySelector("#saveGroupBtn")
 }
 
 DOM.groupSizeInput.addEventListener("input", function(){groupSize = groupSizeInput.value});
@@ -18,6 +20,8 @@ DOM.generateGroupsBtn.addEventListener("click", showTeams);
 DOM.addStudentBtn.addEventListener("click", addStudent);
 DOM.students.addEventListener("click", removeStudent);
 DOM.groups.addEventListener("click", selectStoragedGroup);
+DOM.saveGroupBtn.addEventListener("click", saveGroup);
+DOM.groups.addEventListener("click", removeGroup);
 
 
 (function()
@@ -27,6 +31,46 @@ DOM.groups.addEventListener("click", selectStoragedGroup);
 })();
 
 
+/**
+ * Si se clicka una de las "x" de la lista de grupos, elimina el grupo en cuestión.
+ */
+function removeGroup(event)
+{
+    if (event.target.className == "removeGroupCross")
+    {
+        let indexToRemove = event.target.parentNode.getAttribute("data-group-index");
+        let groups = JSON.parse(localStorage.RCG2groups);
+        groups.splice(indexToRemove, 1);
+        localStorage.RCG2groups = JSON.stringify(groups);
+        students = [];
+        currentGroupIndex = -1;
+        showStoragedGroups();
+        showStudents();
+    }
+}
+
+/**
+ * Activa un prompt y, si se introduce un nombre, crea un grupo nuevo con ese nombre formado por los alumnos escogidos.
+ */
+function saveGroup()
+{
+    let newGroupName = prompt("Nombre del grupo a guardar:");
+    if (newGroupName)
+    {
+        if (newGroupName.trim())
+        {
+            let newGroup = {name: newGroupName, students: Array.from(students)};
+            let groups = JSON.parse(localStorage.RCG2groups);
+            groups.push(newGroup);
+            localStorage.RCG2groups = JSON.stringify(groups);
+            showStoragedGroups();
+        }
+    }
+}
+
+/**
+ * Al hacer click sobre un grupo lo selecciona y muestra los alumnos que lo forman.
+ */
 function selectStoragedGroup(event)
 {
     if (event.target.className == "groupName")
@@ -38,13 +82,14 @@ function selectStoragedGroup(event)
     }
 }
 
-
+/**
+ * Muestra por pantalla los grupos guardados en el localStorage.
+ */
 function showStoragedGroups(){
     if (localStorage.RCG2groups)
     {
         DOM.groups.innerHTML = "";
-        let groups = JSON.parse(localStorage.RCG2groups);
-        groups.forEach((group, index) => 
+        JSON.parse(localStorage.RCG2groups).forEach((group, index) => 
         {
             let groupDiv = document.createElement("div");
             groupDiv.classList.add("storagedGroup");

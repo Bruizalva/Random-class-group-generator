@@ -61,6 +61,11 @@ main>div{
     gap: 1.25rem;
 }
 
+#classGroupHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
 #groupTitle, #storagedGroupsTitle{
     margin: 0px;
 }
